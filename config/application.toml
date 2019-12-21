@@ -2,7 +2,7 @@
 name = "demo-config"
 
 [minio]
-enable = true
+enable = false
 host = "127.0.0.1"
 port = 9000
 access = "minio"

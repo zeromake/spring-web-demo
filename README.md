@@ -66,14 +66,16 @@ modules 部分为通用对象注入例如 `minioClient` 连接对象，数据库
 ```go
 package minio
 func init() {
-    SpringBoot.RegisterNameBeanFn("minioClient", func() *minio.Client {
-        // …… minio 连接实例化并返回
-        // 配合 Condition 来不注入
-        return nil
-    }).ConditionOnMatches(func(ctx SpringCore.SpringContext) bool {
-        // 检查配置是否注入 minioClient
-        return SpringBoot.GetBoolProperty("minio.enable")
-    })
+    SpringBoot.RegisterNameBeanFn(
+        "minioClient",
+        func(config MinioConfig) *minio.Client {
+            return nil
+        },
+        "0:${}",
+    ).ConditionOnPropertyValue(
+        "minio.enable",
+        true,
+    )
 }
 ```
 

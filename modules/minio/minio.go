@@ -3,7 +3,6 @@ package minio
 import (
 	"fmt"
 	SpringBoot "github.com/go-spring/go-spring/spring-boot"
-	SpringCore "github.com/go-spring/go-spring/spring-core"
 	"github.com/minio/minio-go/v6"
 )
 
@@ -18,12 +17,9 @@ type MinioConfig struct {
 }
 
 func init() {
-	SpringBoot.RegisterNameBeanFn("minioClient", func() *minio.Client {
-		var (
-			config MinioConfig
-		)
-		SpringBoot.BindProperty("", &config)
-		if config.Enable {
+	SpringBoot.RegisterNameBeanFn(
+		"minioClient",
+		func(config MinioConfig) *minio.Client {
 			client, err := minio.New(
 				fmt.Sprintf("%s:%d", config.Host, config.Port),
 				config.Access,
@@ -44,9 +40,10 @@ func init() {
 				}
 			}
 			return client
-		}
-		return nil
-	}).ConditionOnMatches(func(ctx SpringCore.SpringContext) bool {
-		return SpringBoot.GetBoolProperty("minio.enable")
-	})
+		},
+		"0:${}",
+	).ConditionOnPropertyValue(
+		"minio.enable",
+		true,
+	)
 }
