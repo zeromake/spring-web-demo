@@ -51,6 +51,8 @@ github.com/go-spring/go-spring v1.0.0-beta h1:OFns0a4XagfU7DUptT13hfc2SoVTCNUvBv
 github.com/go-spring/go-spring v1.0.0-beta/go.mod h1:RAEotHVvLZZq3wvKEAzjhJPBKSXlbZJLk+Dl2Df8z24=
 github.com/go-spring/go-spring v1.0.0-beta.0.20191214102415-50b5007ebcc3 h1:pSuHezpuYt8/Tyr7DC53IVWXTt+IrmALvXEh2WQ4pX4=
 github.com/go-spring/go-spring v1.0.0-beta.0.20191214102415-50b5007ebcc3/go.mod h1:HCd0AWSQelE3CcUZU5075m19OQIUmgBJ+42rmTgieQk=
+github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9 h1:CxdgB6vDIySsg0dIUEZ0mAWXCvD9zuSpHAdYk5zaTFg=
+github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9/go.mod h1:blE+e1GMYdWc5aHbgc075n1OB4yzpC+fmFk1KY6qZyY=
 github.com/go-spring/go-spring-boot-starter v0.0.0-20191215030219-c0a77c8958ec h1:2QgklMx4huxhjw3YxSMT04f+zwAWfAsud1Or2dH7gPg=
 github.com/go-spring/go-spring-boot-starter v0.0.0-20191215030219-c0a77c8958ec/go.mod h1:C8t6UDvpJeZN3lp7EYFp98H+WVaZsGGVBdf8TY4ZsZM=
 github.com/go-spring/go-spring-parent v0.0.0-20191103024245-cc7dade252d5/go.mod h1:Zg3ANEYjqeAW8UMbKy5qkPYklEsQkhR73SuJiiSi2IU=
@@ -63,6 +65,8 @@ github.com/go-spring/go-spring-web v0.0.0-20191103024914-1873b013e560/go.mod h1:
 github.com/go-spring/go-spring-web v0.0.0-20191125062010-f1c9456593de/go.mod h1:R8B0N8nPuYuqlrt/yphpJGLKlx5NUM7M5x9qF6ZBwqE=
 github.com/go-spring/go-spring-web v0.0.0-20191215025740-d180bd4e7ad6 h1:2KMTADNnh+N7Kw/ikCp8hbS6RJqU0VMPSqJBFK2wMd0=
 github.com/go-spring/go-spring-web v0.0.0-20191215025740-d180bd4e7ad6/go.mod h1:R8B0N8nPuYuqlrt/yphpJGLKlx5NUM7M5x9qF6ZBwqE=
+github.com/go-spring/go-spring-web v0.0.0-20191221095130-011bcfb7c6b6 h1:pf45cW7Pjs2bYoflgwI9z3jHLo8vXTlzjwLz7Ysr25Y=
+github.com/go-spring/go-spring-web v0.0.0-20191221095130-011bcfb7c6b6/go.mod h1:R8B0N8nPuYuqlrt/yphpJGLKlx5NUM7M5x9qF6ZBwqE=
 github.com/go-sql-driver/mysql v1.4.1/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
 github.com/go-stack/stack v1.8.0/go.mod h1:v0f6uXyyMGvRgIKkXu+yp6POWl0qKG85gN/melR3HDY=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=

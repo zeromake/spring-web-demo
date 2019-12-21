@@ -7,8 +7,6 @@ import (
 	localProvider "github.com/zeromake/spring-web-demo/modules/file/local"
 	minioProvider "github.com/zeromake/spring-web-demo/modules/file/minio"
 	"github.com/zeromake/spring-web-demo/types"
-	"io"
-	"os"
 )
 
 type ProviderConfig struct {
@@ -22,8 +20,9 @@ type ProviderConfig struct {
 }
 
 type ProviderStarter struct {
-	Config   *ProviderConfig `autowire:""`
-	provider types.FileProvider
+	types.FileProvider
+	Config *ProviderConfig `autowire:""`
+	//provider types.FileProvider
 }
 
 func init() {
@@ -53,34 +52,14 @@ func (m *ProviderStarter) OnStartApplication(ctx SpringBoot.ApplicationContext) 
 				panic(err)
 			}
 		}
-		m.provider = &minioProvider.Provider{
+		m.FileProvider = &minioProvider.Provider{
 			Client: client,
 			Bucket: m.Config.Bucket,
 		}
 	} else {
-		m.provider = &localProvider.Service{}
+		m.FileProvider = &localProvider.Service{}
 	}
 }
 
 func (m *ProviderStarter) OnStopApplication(ctx SpringBoot.ApplicationContext) {
-}
-
-func (m *ProviderStarter) PutObject(name string, r io.Reader, size int64) error {
-	return m.provider.PutObject(name, r, size)
-}
-
-func (m *ProviderStarter) GetObject(name string) (types.ReadCloserAt, error) {
-	return m.provider.GetObject(name)
-}
-
-func (m *ProviderStarter) RemoveObject(name string) error {
-	return m.provider.RemoveObject(name)
-}
-
-func (m *ProviderStarter) StatObject(name string) (os.FileInfo, error) {
-	return m.provider.StatObject(name)
-}
-
-func (m *ProviderStarter) ExistObject(name string) bool {
-	return m.provider.ExistObject(name)
 }

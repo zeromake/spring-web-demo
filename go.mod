@@ -5,9 +5,9 @@ go 1.13
 require (
 	github.com/gin-gonic/gin v1.5.0
 	github.com/go-playground/universal-translator v0.17.0 // indirect
-	github.com/go-spring/go-spring v1.0.0-beta.0.20191214102415-50b5007ebcc3
+	github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9
 	github.com/go-spring/go-spring-boot-starter v0.0.0-20191215030219-c0a77c8958ec
-	github.com/go-spring/go-spring-web v0.0.0-20191215025740-d180bd4e7ad6
+	github.com/go-spring/go-spring-web v0.0.0-20191221095130-011bcfb7c6b6
 	github.com/jinzhu/gorm v1.9.11 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
