@@ -61,7 +61,51 @@ type FileProviderStarter interface {
 }
 ```
 
-module 部分为通过配置实现对应的文件操作接口对象，自行到代码中查看
+modules 部分为通用对象注入例如 `minioClient` 连接对象，数据库之类的
+
+```go
+package minio
+func init() {
+    SpringBoot.RegisterNameBeanFn("minioClient", func() *minio.Client {
+        // …… minio 连接实例化并返回
+        // 配合 Condition 来不注入
+        return nil
+    }).ConditionOnMatches(func(ctx SpringCore.SpringContext) bool {
+        // 检查配置是否注入 minioClient
+        return SpringBoot.GetBoolProperty("minio.enable")
+    })
+}
+```
+
+
+services 部分为通过配置实现对应的文件操作接口对象，自行到代码中查看
+
+主要介绍 service 如何切换注入
+
+local.go
+
+```go
+package local
+func init() {
+	var s types.FileProvider = new(Service)
+    // 没有注入 minioClient 对象才注入
+	SpringBoot.RegisterBean(s).ConditionOnMissingBean("minioClient")
+}
+```
+
+minio.go
+
+```go
+package minio
+func init() {
+	var s types.FileProvider = new(Service)
+    // 注入了 minioClient 对象才注入
+	SpringBoot.RegisterBean(s).ConditionOnBean("minioClient")
+}
+```
+
+使用以上的方案就能做到配置切换也切换注入
+
 
 main 把以上的 controller 和 module 导入即可自动 ioc。
 ```go
@@ -74,6 +118,7 @@ import (
 	_ "github.com/go-spring/go-spring-boot-starter/starter-web"
 	_ "github.com/zeromake/spring-web-demo/controllers"
 	_ "github.com/zeromake/spring-web-demo/modules"
+	_ "github.com/zeromake/spring-web-demo/services"
 )
 
 func main() {
