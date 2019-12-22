@@ -3,7 +3,7 @@ module github.com/zeromake/spring-web-demo
 go 1.13
 
 require (
-	github.com/gin-gonic/gin v1.5.0 // indirect
+	github.com/gin-gonic/gin v1.5.0
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9
 	github.com/go-spring/go-spring-boot-starter v0.0.0-20191215030219-c0a77c8958ec
