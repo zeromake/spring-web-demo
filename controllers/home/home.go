@@ -7,16 +7,13 @@ import (
 )
 
 func init() {
-	SpringBoot.RegisterBean(new(Controller))
+	SpringBoot.RegisterBean(new(Controller)).InitFunc(func(c *Controller) {
+		SpringBoot.GetMapping("/", c.Home)
+	})
 }
 
 type Controller struct{}
 
-func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
-	wc.GET("/", c.Home)
-}
-
 func (c *Controller) Home(ctx SpringWeb.WebContext) {
 	ctx.String(http.StatusOK, "OK!")
 }
-
