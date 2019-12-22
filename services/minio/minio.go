@@ -3,7 +3,6 @@ package minio
 import (
 	SpringBoot "github.com/go-spring/go-spring/spring-boot"
 	"github.com/minio/minio-go/v6"
-	"github.com/pkg/errors"
 	"io"
 )
 
@@ -24,7 +23,7 @@ func (s *Service) PutObject(name string, r io.Reader, size int64) error {
 		size,
 		minio.PutObjectOptions{},
 	)
-	return errors.WithStack(err)
+	return err
 }
 
 func (s *Service) ExistsObject(name string) bool {

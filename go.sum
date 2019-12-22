@@ -38,8 +38,8 @@ github.com/go-playground/universal-translator v0.16.0 h1:X++omBR/4cE2MNg91AoC3rm
 github.com/go-playground/universal-translator v0.16.0/go.mod h1:1AnU7NaIRDWWzGEKwgtJRd2xk99HeFyHw3yid4rvQIY=
 github.com/go-playground/universal-translator v0.17.0 h1:icxd5fm+REJzpZx7ZfpaD876Lmtgy7VtROAbHHXk8no=
 github.com/go-playground/universal-translator v0.17.0/go.mod h1:UkSxE5sNxxRwHyU+Scu5vgOQjsIJAF8j9muTVoKLVtA=
-github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9 h1:CxdgB6vDIySsg0dIUEZ0mAWXCvD9zuSpHAdYk5zaTFg=
-github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9/go.mod h1:blE+e1GMYdWc5aHbgc075n1OB4yzpC+fmFk1KY6qZyY=
+github.com/go-spring/go-spring v1.0.0-beta.0.20191222140303-602f4b98cfbe h1:V1pGc8zndagZkE/ktKcfsZ5hjDlz4a75CZWqS7UN1eQ=
+github.com/go-spring/go-spring v1.0.0-beta.0.20191222140303-602f4b98cfbe/go.mod h1:blE+e1GMYdWc5aHbgc075n1OB4yzpC+fmFk1KY6qZyY=
 github.com/go-spring/go-spring-parent v1.0.0-alpha.0.20191103024245-cc7dade252d5 h1:vby9Da+Klw2fVusjkqYzThGo8YfYhI5M2LcVqTk8mto=
 github.com/go-spring/go-spring-parent v1.0.0-alpha.0.20191103024245-cc7dade252d5/go.mod h1:Zg3ANEYjqeAW8UMbKy5qkPYklEsQkhR73SuJiiSi2IU=
 github.com/go-spring/go-spring-web v0.0.0-20191221095130-011bcfb7c6b6 h1:pf45cW7Pjs2bYoflgwI9z3jHLo8vXTlzjwLz7Ysr25Y=
