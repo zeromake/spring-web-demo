@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type Controller struct {}
-
 func init() {
 	SpringBoot.RegisterBean(new(Controller))
 }
+
+type Controller struct{}
 
 func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
 	wc.GET("/", c.Home)

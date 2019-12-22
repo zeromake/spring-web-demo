@@ -1,8 +1,11 @@
 [spring.application]
 name = "demo-config"
 
+[file]
+dir = "temp"
+
 [minio]
-enable = false
+enable = true
 host = "127.0.0.1"
 port = 9000
 access = "minio"

@@ -8,7 +8,6 @@ require (
 	github.com/go-spring/go-spring v1.0.0-beta.0.20191221110207-1fc5e6787cb9
 	github.com/go-spring/go-spring-boot-starter v0.0.0-20191215030219-c0a77c8958ec
 	github.com/go-spring/go-spring-web v0.0.0-20191221095130-011bcfb7c6b6
-	github.com/jinzhu/gorm v1.9.11 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect

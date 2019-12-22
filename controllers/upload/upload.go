@@ -11,6 +11,7 @@ import (
 
 type Controller struct {
 	File types.FileProvider `autowire:""`
+	Dir  string             `value:"${file.dir}"`
 }
 
 func init() {
@@ -22,7 +23,7 @@ func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
 }
 
 func (c *Controller) Upload(ctx SpringWeb.WebContext) {
-	file, err := ctx.FormFile("file")
+	f, err := ctx.FormFile("file")
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"code":    1,
@@ -31,7 +32,7 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 		})
 		return
 	}
-	w, err := file.Open()
+	w, err := f.Open()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"code":    1,
@@ -43,24 +44,26 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 	defer func() {
 		_ = w.Close()
 	}()
-	size := file.Size
-	out := path.Join("temp", file.Filename)
-	if !c.File.ExistObject(out) {
-		err = c.File.PutObject(out, w, size)
-	}
-	defer func() {
+	out := path.Join(c.Dir, f.Filename)
+
+	if !c.File.ExistsObject(out) {
+		err = c.File.PutObject(out, w, f.Size)
 		if err != nil {
-			_ = c.File.RemoveObject(out)
+			ctx.JSON(http.StatusInternalServerError, gin.H{
+				"code":    1,
+				"message": "保存失败",
+				"error":   err.Error(),
+			})
+			return
 		}
-	}()
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
+	} else {
+		ctx.JSON(http.StatusBadRequest, gin.H{
 			"code":    1,
-			"message": "文件保存失败",
-			"error":   err.Error(),
+			"message": "该文件已存在",
 		})
 		return
 	}
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"code":    0,
 		"message": http.StatusText(http.StatusOK),
