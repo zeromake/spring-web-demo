@@ -4,19 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 	SpringWeb "github.com/go-spring/go-spring-web/spring-web"
 	SpringBoot "github.com/go-spring/go-spring/spring-boot"
-	"io"
+	"github.com/zeromake/spring-web-demo/services/file"
 	"net/http"
-	"os"
 	"path"
 )
 
-type Controller struct{}
-
-const (
-	DIR_MARK  os.FileMode = 0755
-	FILE_MAEK os.FileMode = 0644
-	FILE_FLAG             = os.O_CREATE | os.O_WRONLY | os.O_TRUNC
-)
+type Controller struct {
+	File *file.Service `autowrte:""`
+}
 
 func init() {
 	SpringBoot.RegisterBean(new(Controller))
@@ -27,7 +22,7 @@ func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
 }
 
 func (c *Controller) Upload(ctx SpringWeb.WebContext) {
-	file, err := ctx.FormFile("file")
+	f, err := ctx.FormFile("file")
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"code":    1,
@@ -36,7 +31,7 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 		})
 		return
 	}
-	w, err := file.Open()
+	w, err := f.Open()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"code":    1,
@@ -48,37 +43,14 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 	defer func() {
 		_ = w.Close()
 	}()
-	out := path.Join("temp", file.Filename)
-	if !PathExists(out) {
-		dir := path.Dir(out)
-		if !PathExists(dir) {
-			err = os.MkdirAll(dir, DIR_MARK)
-			if err != nil {
-				ctx.JSON(http.StatusInternalServerError, gin.H{
-					"code":    1,
-					"message": "文件夹创建失败",
-					"error":   err.Error(),
-				})
-				return
-			}
-		}
-		dst, err := os.OpenFile(out, FILE_FLAG, FILE_MAEK)
+	out := path.Join("temp", f.Filename)
+
+	if !c.File.ExistsObject(out) {
+		err = c.File.PutObject(out, w, f.Size)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{
 				"code":    1,
-				"message": "文件创建失败",
-				"error":   err.Error(),
-			})
-			return
-		}
-		defer func() {
-			_ = dst.Close()
-		}()
-		_, err = io.Copy(dst, w)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, gin.H{
-				"code":    1,
-				"message": "文件写入失败",
+				"message": "保存失败",
 				"error":   err.Error(),
 			})
 			return
@@ -90,6 +62,7 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 		})
 		return
 	}
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"code":    0,
 		"message": http.StatusText(http.StatusOK),
@@ -97,15 +70,4 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 			"url": out,
 		},
 	})
-}
-
-func PathExists(path string) bool {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true
-	}
-	if os.IsNotExist(err) {
-		return false
-	}
-	return false
 }

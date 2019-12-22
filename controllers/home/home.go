@@ -19,4 +19,3 @@ func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
 func (c *Controller) Home(ctx SpringWeb.WebContext) {
 	ctx.String(http.StatusOK, "OK!")
 }
-
