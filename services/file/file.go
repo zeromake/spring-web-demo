@@ -1,6 +1,7 @@
 package file
 
 import (
+	SpringBoot "github.com/go-spring/go-spring/spring-boot"
 	"io"
 	"os"
 	"path"
@@ -13,6 +14,10 @@ const (
 )
 
 type Service struct{}
+
+func init() {
+	SpringBoot.RegisterBean(new(Service))
+}
 
 func (s *Service) PutObject(name string, r io.Reader, size int64) (err error) {
 	dir := path.Dir(name)
