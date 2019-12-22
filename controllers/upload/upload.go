@@ -14,11 +14,9 @@ type Controller struct {
 }
 
 func init() {
-	SpringBoot.RegisterBean(new(Controller))
-}
-
-func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
-	wc.POST("/upload", c.Upload)
+	SpringBoot.RegisterBean(new(Controller)).InitFunc(func(c *Controller) {
+		SpringBoot.PostMapping("/upload", c.Upload)
+	})
 }
 
 func (c *Controller) Upload(ctx SpringWeb.WebContext) {
