@@ -11,6 +11,7 @@ import (
 
 type Controller struct {
 	File types.FileProvider `autowire:""`
+	Dir  string             `value:"${file.dir}"`
 }
 
 func init() {
@@ -43,7 +44,7 @@ func (c *Controller) Upload(ctx SpringWeb.WebContext) {
 	defer func() {
 		_ = w.Close()
 	}()
-	out := path.Join("temp", f.Filename)
+	out := path.Join(c.Dir, f.Filename)
 
 	if !c.File.ExistsObject(out) {
 		err = c.File.PutObject(out, w, f.Size)
