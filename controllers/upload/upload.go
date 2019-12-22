@@ -4,13 +4,13 @@ import (
 	"github.com/gin-gonic/gin"
 	SpringWeb "github.com/go-spring/go-spring-web/spring-web"
 	SpringBoot "github.com/go-spring/go-spring/spring-boot"
-	"github.com/zeromake/spring-web-demo/services/file"
+	"github.com/zeromake/spring-web-demo/types"
 	"net/http"
 	"path"
 )
 
 type Controller struct {
-	File *file.Service `autowire:""`
+	File types.FileProvider `autowire:""`
 }
 
 func init() {
