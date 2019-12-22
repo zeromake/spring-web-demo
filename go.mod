@@ -11,6 +11,8 @@ require (
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect
+	github.com/minio/minio-go/v6 v6.0.44
+	github.com/pkg/errors v0.8.0
 	golang.org/x/sys v0.0.0-20191220220014-0732a990476f // indirect
 	gopkg.in/go-playground/validator.v9 v9.30.2 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect

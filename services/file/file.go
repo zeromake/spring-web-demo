@@ -16,7 +16,7 @@ const (
 type Service struct{}
 
 func init() {
-	SpringBoot.RegisterBean(new(Service))
+	SpringBoot.RegisterBean(new(Service)).ConditionOnMissingBean("minioClient")
 }
 
 func (s *Service) PutObject(name string, r io.Reader, size int64) (err error) {
