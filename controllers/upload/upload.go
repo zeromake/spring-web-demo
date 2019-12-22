@@ -10,7 +10,7 @@ import (
 )
 
 type Controller struct {
-	File *file.Service `autowrte:""`
+	File *file.Service `autowire:""`
 }
 
 func init() {
