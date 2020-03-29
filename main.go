@@ -9,7 +9,7 @@ import (
 )
 
 func init() {
-	SpringBoot.RegisterBean(new(Controller)).InitFunc(func(c *Controller) {
+	SpringBoot.RegisterBean(new(Controller)).Init(func(c *Controller) {
 		SpringBoot.GetMapping("/", c.Home)
 	})
 }
