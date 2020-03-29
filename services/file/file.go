@@ -2,6 +2,7 @@ package file
 
 import (
 	SpringBoot "github.com/go-spring/go-spring/spring-boot"
+	"github.com/zeromake/spring-web-demo/types"
 	"io"
 	"os"
 	"path"
@@ -16,7 +17,8 @@ const (
 type Service struct{}
 
 func init() {
-	SpringBoot.RegisterBean(new(Service)).ConditionOnMissingBean("minioClient")
+	var s = new(Service)
+	SpringBoot.RegisterBean(s).AsInterface((*types.FileProvider)(nil)).ConditionOnMissingBean("minioClient")
 }
 
 func (s *Service) PutObject(name string, r io.Reader, size int64) (err error) {
