@@ -22,8 +22,11 @@ type Controller struct {
 	File types.FileProvider `autowire:""`
 }
 
-func (c *Controller) InitWebBean(wc SpringWeb.WebContainer) {
-	wc.POST("/upload", c.Upload)
+
+func init() {
+	SpringBoot.RegisterBean(new(Controller)).Init(func(c *Controller) {
+		SpringBoot.PostMapping("/upload", c.Upload)
+	})
 }
 
 func (c *Controller) Upload(ctx SpringWeb.WebContext) {
@@ -89,9 +92,9 @@ local.go
 ```go
 package local
 func init() {
-	var s types.FileProvider = new(Service)
+	var s = new(Service)
     // 没有注入 minioClient 对象才注入
-	SpringBoot.RegisterBean(s).ConditionOnMissingBean("minioClient")
+	SpringBoot.RegisterBean(s).AsInterface((*types.FileProvider)(nil)).ConditionOnMissingBean("minioClient")
 }
 ```
 
@@ -100,9 +103,9 @@ minio.go
 ```go
 package minio
 func init() {
-	var s types.FileProvider = new(Service)
+	var s = new(Service)
     // 注入了 minioClient 对象才注入
-	SpringBoot.RegisterBean(s).ConditionOnBean("minioClient")
+	SpringBoot.RegisterBean(s).AsInterface((*types.FileProvider)(nil)).ConditionOnBean("minioClient")
 }
 ```
 
